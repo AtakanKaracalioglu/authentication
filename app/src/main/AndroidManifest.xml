@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".videoRecording"></activity>
+        <activity android:name=".database"></activity>
+        <activity android:name=".videoRecording" />
         <activity android:name=".MapsActivity" />
 
         <meta-data

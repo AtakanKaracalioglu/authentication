@@ -10,17 +10,32 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
+        android:text="Logın"
         android:id="@+id/login"
         android:layout_centerInParent="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign up"
+        android:text="Sıgn-up"
         android:id="@+id/signup"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/login"
         />
+    <Button
+        android:id="@+id/ipButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="650dp"
+        android:text="Change IP" />
+
+    <EditText
+        android:id="@+id/ipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="600dp"
+        android:hint="Enter IP" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

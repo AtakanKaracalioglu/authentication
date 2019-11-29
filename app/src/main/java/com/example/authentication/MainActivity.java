@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 private Retrofit retrofit;
 private RetrofitInterface retrofitInterface;
-private String BASE_URL = "http://139.179.32.243:3000";
+static String BASE_URL = "http://139.179.55.44:3000";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +45,37 @@ private String BASE_URL = "http://139.179.32.243:3000";
                 handleLoginDialog();
             }
         });
+
         findViewById(R.id.signup).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handleSignupDialog();
             }
         });
+        final EditText ipText = this.findViewById(R.id.ipText);
+
+        findViewById(R.id.ipButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                //final EditText ipText = view.findViewById(R.id.ipText);
+                String ip_addr;
+                ip_addr = ipText.getText().toString();
+                BASE_URL = "http://" + ip_addr + ":3000";
+                Toast.makeText(MainActivity.this, "Update IP Address to " + BASE_URL, Toast.LENGTH_SHORT).show();
+
+
+                retrofit = new Retrofit.Builder()
+                        .baseUrl(BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                retrofitInterface = retrofit.create(RetrofitInterface.class);
             }
+
+        });
+            }
+
+
 
     private void handleLoginDialog() {
         View view = getLayoutInflater().inflate(R.layout.login_dialog, null);
@@ -147,18 +171,5 @@ private String BASE_URL = "http://139.179.32.243:3000";
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

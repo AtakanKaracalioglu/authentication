@@ -1,10 +1,14 @@
 package com.example.authentication;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,15 +18,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -31,6 +46,8 @@ public class Main2Activity extends AppCompatActivity {
     private String mFileName = null;
     private LocationManager locationManager;
     private LocationListener locationListener;
+    private Retrofit retrofit;
+    private RetrofitInterface retrofitInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +56,82 @@ public class Main2Activity extends AppCompatActivity {
         final Button audio = (Button) findViewById(R.id.audio_but);
         final Button video = (Button) findViewById(R.id.video_but);
         final Button location = (Button) findViewById(R.id.gps_but);
+        final Button database = (Button) findViewById(R.id.database_but);
 
+        retrofit = new Retrofit.Builder()
+                .baseUrl(MainActivity.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        retrofitInterface = retrofit.create(RetrofitInterface.class);
+        findViewById(R.id.mainButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                handleMainDialog();
+            }
+        });
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    Activity#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for Activity#requestPermissions for more details.
+                    return;
+                }
+                Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if(location == null)
+                {
+                    Toast.makeText(Main2Activity.this,
+                            "null", Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    Toast.makeText(Main2Activity.this,
+                            "location:" + location.getLatitude() + ", " + location.getLongitude(), Toast.LENGTH_LONG).show();
+                }
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put("longitude", ""+location.getLongitude());
+                map.put("latitude", ""+location.getLatitude());
+
+                Call<SendGpsResult> call = retrofitInterface.executeSendGps(map);
+
+                call.enqueue(new Callback<SendGpsResult>() {
+                    @Override
+                    public void onResponse(Call<SendGpsResult> call, Response<SendGpsResult> response) {
+                        if(response.code()==200){
+                            Toast.makeText(Main2Activity.this,
+                                    "Sent Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else if(response.code()==400){
+                            Toast.makeText(Main2Activity.this,
+                                    "Sent Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SendGpsResult> call, Throwable t) {
+                        Toast.makeText(Main2Activity.this, t.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                Intent intent = new Intent(Main2Activity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName += "/recorded_audio.3gp";
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+      /*
         location.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -52,8 +140,15 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+*/
+        database.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
+                Intent intent = new Intent(Main2Activity.this, database.class);
+                startActivity(intent);
 
+            }
+        });
         /*
         Button mybuton2 = (Button) findViewById(R.id.loc_but);
 
@@ -139,6 +234,8 @@ public class Main2Activity extends AppCompatActivity {
 
         });
 
+
+
         video.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -148,6 +245,7 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+
 
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -182,6 +280,55 @@ public class Main2Activity extends AppCompatActivity {
         mediaRecorder = null;
 
     }
+    private void handleMainDialog() {
+        View view = getLayoutInflater().inflate(R.layout.send_text_dialog, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(view).show();
+
+        Button sendBtn = view.findViewById(R.id.sendMsg);
+        final EditText textEdit = view.findViewById(R.id.textEdit);
+        final EditText ownerEdit = view.findViewById(R.id.ownerEdit);
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put("text", textEdit.getText().toString());
+                map.put("owner", ownerEdit.getText().toString());
+
+                Call<SendResult> call = retrofitInterface.executeSendMsg(map);
+
+                call.enqueue(new Callback<SendResult>() {
+                    @Override
+                    public void onResponse(Call<SendResult> call, Response<SendResult> response) {
+                        if(response.code()==200){
+                            Toast.makeText(Main2Activity.this,
+                                    "Sent Successfully", Toast.LENGTH_LONG).show();
+                        }
+                        else if(response.code()==400){
+                            Toast.makeText(Main2Activity.this,
+                                    "Sent Failed", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<SendResult> call, Throwable t) {
+                        Toast.makeText(Main2Activity.this, t.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+    }
+public boolean onCreateOptionsMenu(Menu menu)
+{
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.menu_main,menu);
+    return  true;
+
+}
 
 
 }
