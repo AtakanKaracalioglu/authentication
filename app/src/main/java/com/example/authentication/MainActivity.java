@@ -2,21 +2,15 @@ package com.example.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.HashMap;
 
@@ -29,7 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 private Retrofit retrofit;
 private RetrofitInterface retrofitInterface;
-static String BASE_URL = "http://139.179.55.44:3000";
+static String BASE_URL = "http://139.179.55.134:3000";
+static String mail;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +96,7 @@ static String BASE_URL = "http://139.179.55.44:3000";
                                                           AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
                                                           builder1.setTitle(result.getName());
                                                           builder1.setMessage(result.getEmail());
-
+                                                          mail = result.getEmail();
                                                           builder1.show();
                                                           Intent intent = new Intent(MainActivity.this , Main2Activity.class);
                                                           startActivity(intent);
@@ -109,7 +104,7 @@ static String BASE_URL = "http://139.179.55.44:3000";
 
                                                       }else if(response.code() == 404)
                                                       {
-                                                          Toast.makeText(MainActivity.this,"Wrong bro", Toast.LENGTH_LONG).show();
+                                                          Toast.makeText(MainActivity.this,"Not a member!", Toast.LENGTH_LONG).show();
                                                       }
                                                 }
 

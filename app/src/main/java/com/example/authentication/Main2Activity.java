@@ -1,11 +1,6 @@
 package com.example.authentication;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,25 +8,24 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaRecorder;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.UUID;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +42,7 @@ public class Main2Activity extends AppCompatActivity {
     private LocationListener locationListener;
     private Retrofit retrofit;
     private RetrofitInterface retrofitInterface;
+    public static List temparray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,7 @@ public class Main2Activity extends AppCompatActivity {
         final Button video = (Button) findViewById(R.id.video_but);
         final Button location = (Button) findViewById(R.id.gps_but);
         final Button database = (Button) findViewById(R.id.database_but);
+        final Button temp_sensor = (Button) findViewById(R.id.tempp_but);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(MainActivity.BASE_URL)
@@ -70,6 +66,30 @@ public class Main2Activity extends AppCompatActivity {
                 handleMainDialog();
             }
         });
+        Button temp = (Button) findViewById(R.id.temp_but);
+
+        temp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Intent temp_int = new Intent(Main2Activity.this, tempature.class);
+                startActivity(temp_int);
+            }
+        });
+
+
+        final Button gettempdata = (Button) findViewById(R.id.tempdata_but);
+        gettempdata.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent temperature = new Intent(Main2Activity.this, gettempdata.class);
+                startActivity(temperature);
+            }
+        });
+
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +120,7 @@ public class Main2Activity extends AppCompatActivity {
 
                 map.put("longitude", ""+location.getLongitude());
                 map.put("latitude", ""+location.getLatitude());
+                map.put("owner", ""+MainActivity.mail);
 
                 Call<SendGpsResult> call = retrofitInterface.executeSendGps(map);
 
@@ -212,7 +233,14 @@ public class Main2Activity extends AppCompatActivity {
         });
         */
 
-
+        Button acc = (Button) findViewById(R.id.acc_but);
+        acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Main2Activity.this, accelometer.class);
+                startActivity(intent);
+            }
+        });
 
         audio.setOnTouchListener(new View.OnTouchListener() {
 
@@ -262,6 +290,8 @@ public class Main2Activity extends AppCompatActivity {
 
             mediaRecorder.setOutputFile(mFileName);
             mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            Toast.makeText(this, "başarılı",Toast.LENGTH_LONG).show();
+
         try
         {
             mediaRecorder.prepare();

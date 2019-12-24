@@ -3,8 +3,9 @@ package com.example.authentication;
 import java.util.HashMap;
 
 import retrofit2.Call;
-import retrofit2.http.POST;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface RetrofitInterface {
     @POST("/login")
@@ -18,6 +19,11 @@ public interface RetrofitInterface {
 
     @POST("/sendmsg")
     Call<SendResult> executeSendMsg(@Body HashMap<String, String> map);
+
+    @GET ("/gettemp")
+    Call<TemperatureResult> executetempget();
+
+
 
 
 }

@@ -21,73 +21,140 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.568" />
+
     <Button
 
-        android:text="Send Text"
         android:id="@+id/mainButton"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
 
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="390dp"
         android:layout_marginEnd="132dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-    <Button
-        android:id="@+id/gps_but"
-        android:src="@drawable/background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="400dp"
-        android:layout_marginEnd="132dp"
-        android:text="GPS Locatıon"
-        app:layout_constraintBottom_toTopOf="@+id/audio_but"
+        android:layout_marginBottom="13dp"
+        android:text="Send Text"
+        app:layout_constraintBottom_toTopOf="@+id/database_but"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/audio_but"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
+        android:id="@+id/temp_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+
+        android:layout_marginTop="330dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="14dp"
+        android:text="Tempature"
+        app:layout_constraintBottom_toTopOf="@+id/mainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+
+        android:id="@+id/tempdata_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="32dp"
+        android:text="Get Temp"
+        app:layout_constraintBottom_toTopOf="@+id/acc_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+
+        android:id="@+id/tempp_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="92dp"
+        android:text="Sensor Temp"
+        app:layout_constraintBottom_toTopOf="@+id/acc_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.991" />
+
+    <Button
+
+        android:id="@+id/acc_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="132dp"
+        android:layout_marginBottom="2dp"
+        android:text="Accelerometer"
+        app:layout_constraintBottom_toTopOf="@+id/temp_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/gps_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="510dp"
+        android:layout_marginEnd="132dp"
+        android:src="@drawable/background"
+        android:text="GPS Locatıon"
+        app:layout_constraintBottom_toTopOf="@+id/audio_but"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/audio_but"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="133dp"
+        android:layout_marginEnd="132dp"
         android:text="Record Audıo"
         app:layout_constraintBottom_toTopOf="@+id/video_but"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gps_but" />
 
     <Button
         android:id="@+id/database_but"
-        android:layout_width="120dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="430dp"
         android:layout_marginEnd="132dp"
         android:text="database"
         app:layout_constraintBottom_toTopOf="@+id/gps_but"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-     />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/video_but"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
         android:layout_marginEnd="132dp"
-        android:layout_marginBottom="30dp"
         android:text="Record Video"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/audio_but" />
 </androidx.constraintlayout.widget.ConstraintLayout>
