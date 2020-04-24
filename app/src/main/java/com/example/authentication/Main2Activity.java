@@ -49,6 +49,7 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         final Button audio = (Button) findViewById(R.id.audio_but);
+        final Button rms = (Button) findViewById(R.id.rms_button);
         final Button video = (Button) findViewById(R.id.video_but);
         final Button location = (Button) findViewById(R.id.gps_but);
         final Button database = (Button) findViewById(R.id.database_but);
@@ -86,6 +87,14 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent temperature = new Intent(Main2Activity.this, gettempdata.class);
+                startActivity(temperature);
+            }
+        });
+        rms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent temperature = new Intent(Main2Activity.this, rms.class);
                 startActivity(temperature);
             }
         });

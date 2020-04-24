@@ -23,8 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".gettempdata"></activity>
-
+        <activity android:name=".rms"></activity>
+        <activity android:name=".gettempdata" />
         <activity android:name=".accelometer" />
         <activity
             android:name=".tempature"
@@ -36,7 +36,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBL8rmX83-G3kaN862AQ9BdX4UE0CPhwXc" />
+            android:value="AIzaSyCx7wkDb2tehdYtkBEaL884fWN8C9gG77E" />
 
         <activity android:name=".Main2Activity" />
         <activity
