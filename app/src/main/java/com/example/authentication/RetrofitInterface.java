@@ -21,7 +21,7 @@ public interface RetrofitInterface {
     Call<SendResult> executeSendMsg(@Body HashMap<String, String> map);
 
     @GET ("/gettemp")
-    Call<TemperatureResult> executetempget();
+    Call<TemperatureResult[]> executetempget();
 
 
 

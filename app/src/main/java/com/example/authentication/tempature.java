@@ -63,7 +63,7 @@ public class tempature extends AppCompatActivity {
 
                 graph.getViewport().setXAxisBoundsManual(true);
                 graph.getViewport().setMinX(0);
-                graph.getViewport().setMaxX(35);
+                graph.getViewport().setMaxX(100);
                 // enable scaling and scrolling
                 graph.getViewport().setScalable(true);
                 graph.getViewport().setScalableY(true);

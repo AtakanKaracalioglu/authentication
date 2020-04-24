@@ -22,6 +22,7 @@ public class TemperatureResult {
     private String r;
     private String s;
     private String t;
+    private Integer index;
 
 
     public String getA() {
@@ -103,6 +104,8 @@ public class TemperatureResult {
     public String getT() {
         return t;
     }
+
+    public Integer getIndex(){return index;}
 
 
 

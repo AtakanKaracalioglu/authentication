@@ -41,55 +41,48 @@ public class gettempdata extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                Call<TemperatureResult> call = retrofitInterface.executetempget();
+                Call<TemperatureResult[]> call = retrofitInterface.executetempget();
 
-                call.enqueue(new Callback<TemperatureResult>() {
+                call.enqueue(new Callback<TemperatureResult[]>() {
                     @Override
-                    public void onResponse(Call<TemperatureResult> call, Response<TemperatureResult> response) {
+                    public void onResponse(Call<TemperatureResult[]> call, Response<TemperatureResult[]> response) {
                         if(response.code()==200)
                         {
                             Toast.makeText(gettempdata.this,
                                     response.toString(), Toast.LENGTH_LONG).show();
-                            TemperatureResult result = response.body();
+                            TemperatureResult[] resultx = response.body();
                             lst = new ArrayList<>();
-                            String a = result.getA();
-                            String b = result.getB();
-                            String c = result.getC();
-                            String d = result.getD();
-                            String e = result.getE();
-                            String f = result.getF();
-                            String g = result.getG();
-                            String h = result.getH();
-                            String i = result.getI();
-                            String j = result.getJ();
-                            String k = result.getK();
-                            String l = result.getL();
-                            String m = result.getM();
-                            String n = result.getN();
-                            String o = result.getO();
-                            String p = result.getP();
-                            String r = result.getR();
-                            String s = result.getS();
-                            String t = result.getT();
-                            lst.add(a);
-                            lst.add(b);
-                            lst.add(c);
-                            lst.add(d);
-                            lst.add(e);
-                            lst.add(f);
-                            lst.add(g);
-                            lst.add(h);
-                            lst.add(i);
-                            lst.add(j);
-                            lst.add(k);
-                            lst.add(l);
-                            lst.add(m);
-                            lst.add(n);
-                            lst.add(o);
-                            lst.add(p);
-                            lst.add(r);
-                            lst.add(s);
-                            lst.add(t);
+                            String a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, index;
+
+                            Integer indexx;
+                            TemperatureResult result;
+
+                            for(int z = 0; z < 5; z++)
+                            {
+                                result = resultx[z];
+                                lst.add(result.getA());
+                                lst.add(result.getB());
+                                lst.add(result.getC());
+                                lst.add(result.getD());
+                                lst.add(result.getE());
+                                lst.add(result.getF());
+                                lst.add(result.getG());
+                                lst.add(result.getH());
+                                lst.add(result.getI());
+                                lst.add(result.getJ());
+                                lst.add(result.getK());
+                                lst.add(result.getL());
+                                lst.add(result.getM());
+                                lst.add(result.getN());
+                                lst.add(result.getO());
+                                lst.add(result.getP());
+                                lst.add(result.getQ());
+                                lst.add(result.getR());
+                                lst.add(result.getS());
+                                lst.add(result.getT());
+                            }
+
+
                             responseText.setTextSize(25);
                             responseText.setText(String.valueOf(lst));
 
@@ -104,7 +97,7 @@ public class gettempdata extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<TemperatureResult> call, Throwable t) {
+                    public void onFailure(Call<TemperatureResult[]> call, Throwable t) {
                         Toast.makeText(gettempdata.this, t.getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
