@@ -17,6 +17,9 @@ public interface RetrofitInterface {
     @POST("/sendgps")
     Call<SendGpsResult> executeSendGps(@Body HashMap<String, String> map);
 
+    @POST("/sendrms")
+    Call<SendRmsResult> executeSendRms(@Body HashMap<String,String> map);
+
     @POST("/sendmsg")
     Call<SendResult> executeSendMsg(@Body HashMap<String, String> map);
 

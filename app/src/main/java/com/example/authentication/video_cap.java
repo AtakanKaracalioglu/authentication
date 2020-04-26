@@ -11,6 +11,7 @@ import java.io.File;
 
 public class video_cap extends Activity {
     private final int VIDEO_REQUEST_CODE = 100;
+
     public void captureVideo(View view)
     {
         Intent camera_intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
@@ -43,6 +44,9 @@ public class video_cap extends Activity {
             folder.mkdir();
         }
         File video_file = new File(folder,"sample_video.mp4");
+
         return video_file;
     }
+
+
 }

@@ -23,7 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".rms"></activity>
+        <activity
+            android:name=".firebase"
+            android:label="@string/title_activity_firebase"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".rms" />
         <activity android:name=".gettempdata" />
         <activity android:name=".accelometer" />
         <activity

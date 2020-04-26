@@ -5,56 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".rms">
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/original"
-        android:layout_width="304dp"
-        android:layout_height="151dp"
-        android:layout_marginBottom="331dp"
+        android:layout_width="257dp"
+        android:layout_height="137dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="10dp"
         android:background="#F7D5F1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/rms_graph"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/fft"
+        android:layout_width="249dp"
+        android:layout_height="133dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="71dp"
+        android:background="#F7D5F1"
+        app:layout_constraintBottom_toTopOf="@+id/updat_but"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rms_graph" />
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/rms_graph"
-        android:layout_width="304dp"
-        android:layout_height="151dp"
-        android:layout_marginBottom="45dp"
+        android:layout_width="247dp"
+        android:layout_height="125dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="16dp"
         android:background="#F7D5F1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fft"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.698"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintTop_toBottomOf="@+id/original" />
 
     <Button
         android:id="@+id/updat_but"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="84dp"
-        android:layout_marginEnd="143dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="35dp"
         android:text="Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rms_graph" />
+        app:layout_constraintTop_toBottomOf="@+id/fft" />
 
-    <Button
-        android:id="@+id/send_but"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="178dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="145dp"
-        android:layout_marginBottom="24dp"
-        android:text="send"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/updat_but" />
 </androidx.constraintlayout.widget.ConstraintLayout>
